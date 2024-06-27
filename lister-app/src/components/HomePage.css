@@ -1,0 +1,29 @@
+.home-page {
+    padding: 20px;
+  }
+  
+  .boards-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .board {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 16px;
+    width: 300px;
+  }
+  
+  .items-container {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+  }
