@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Lister.Models;
 using Microsoft.EntityFrameworkCore;
+using Lister.DatabaseAccess;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lister.Controllers
 {
@@ -69,6 +71,24 @@ namespace Lister.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             return Ok();
+        }
+
+        [HttpGet("currentuser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var user = await _context.Clients.FindAsync(Guid.Parse(userId));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { userId = user.ClientId, username = user.Name });
         }
 
         [HttpPost("logout")]

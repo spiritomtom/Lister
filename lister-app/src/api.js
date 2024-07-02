@@ -61,7 +61,6 @@ export const getClients = async () => {
   }
 };
 
-// Get a specific work item by ID
 export const getWorkItem = async (id) => {
   try {
     const response = await apiClient.get(`${API_BASE_URL}/api/workitems/${id}`);
@@ -72,7 +71,6 @@ export const getWorkItem = async (id) => {
   }
 };
 
-// Update a work item
 export const updateWorkItem = async (id, data) => {
   try {
     const response = await apiClient.put(`${API_BASE_URL}/api/workitems/${id}`, data);
@@ -83,12 +81,31 @@ export const updateWorkItem = async (id, data) => {
   }
 };
 
-// Delete a work item
 export const deleteWorkItem = async (id) => {
   try {
     await apiClient.delete(`${API_BASE_URL}/api/workitems/${id}`);
   } catch (error) {
     console.error("Error deleting work item: ", error);
+    throw error;
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    const response = await apiClient.get('/api/auth/currentuser');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching current user: ", error);
+    throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    await apiClient.post('/api/auth/logout');
+    localStorage.removeItem('token');
+  } catch (error) {
+    console.error("Error logging out: ", error);
     throw error;
   }
 };

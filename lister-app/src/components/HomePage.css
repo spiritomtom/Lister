@@ -97,7 +97,6 @@
   background-color: #e9e9e9;
 }
 
-/* Placeholder styles to help visualize drop zones */
 .items-container > .placeholder {
   border: 2px dashed #ccc;
   border-radius: 4px;
@@ -106,4 +105,35 @@
   margin-bottom: 12px;
   text-align: center;
   color: #aaa;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Добавяне на пространство между заглавието и останалото съдържание */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  margin-right: 20px; /* Разстояние между името на потребителя и бутона за излизане */
+  font-size: 16px;
+  color: #333; /* Може да се промени според вашите предпочитания */
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
 }
