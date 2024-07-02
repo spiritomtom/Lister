@@ -1,11 +1,11 @@
-﻿using Lister.DatabaseAccess;
+﻿using System;
 using Lister.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lister.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class WorkItemsController : ControllerBase
     {
@@ -30,12 +30,10 @@ namespace Lister.Controllers
             return Ok(item);
         }
 
-        // GET: /workitems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<WorkItem>>> GetWorkItems()
         {
             var workItems = await _databaseContext.WorkItems.ToListAsync();
-
             return Ok(workItems);
         }
 
