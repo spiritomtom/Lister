@@ -21,7 +21,7 @@ const Register = ({ setIsAuthenticated }) => {
       await register({ email, password, confirmPassword });
       alert("Registration successful! Logging you in...");
       setIsAuthenticated(true);
-      localStorage.setItem('token', 'example-token'); // Simulating storing a token
+      localStorage.setItem('token', 'example-token');
       navigate('/');
     } catch (err) {
       setError("Error registering user. Please try again.");

@@ -1,6 +1,8 @@
 ﻿using Lister.Models;
 using Microsoft.EntityFrameworkCore;
 
+namespace Lister.DatabaseAccess;
+
 public class SqlServerDatabaseContext : DbContext
 {
     public SqlServerDatabaseContext(DbContextOptions<SqlServerDatabaseContext> options)

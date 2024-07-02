@@ -17,8 +17,8 @@ const Login = ({ setIsAuthenticated }) => {
       await login({ email, password, rememberMe });
       alert("Login successful! Redirecting to home...");
       setIsAuthenticated(true);
-      localStorage.setItem('token', 'example-token'); // Simulating storing a token
-      navigate('/'); // Redirect to home after login
+      localStorage.setItem('token', 'example-token');
+      navigate('/'); 
     } catch (err) {
       setError("Invalid login attempt. Please try again.");
     }
@@ -61,7 +61,7 @@ const Login = ({ setIsAuthenticated }) => {
       </form>
       <p>
         Click here if you are new: <Link to="/register">Register</Link>
-      </p> {/* Add this paragraph */}
+      </p> {}
     </div>
   );
 };
