@@ -1,61 +1,94 @@
+// api.js or a similar file where your API calls are defined
+
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5049'; // Your backend base URL
+const API_BASE_URL = 'http://localhost:5049'; // Ensure this matches your backend URL
 
-// Get all work items
-export const getWorkItems = async () => {
-  const response = await axios.get(`${API_BASE_URL}/api/workitems`);
-  return response.data;
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export const register = async (data) => {
+  try {
+    const response = await apiClient.post('/api/auth/register', data);
+    return response.data;
+  } catch (error) {
+    console.error("Error registering user: ", error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
 };
 
-// Create a new work item
+export const login = async (data) => {
+  try {
+    const response = await apiClient.post('/api/auth/login', data);
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in: ", error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const getWorkItems = async () => {
+  try {
+    const response = await apiClient.get('/api/workitems');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching work items: ", error);
+    throw error;
+  }
+};
+
 export const createWorkItem = async (data) => {
-  const response = await axios.post(`${API_BASE_URL}/api/workitems`, data);
-  return response.data;
+  try {
+    const response = await apiClient.post('/api/workitems', data);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating work item: ", error);
+    throw error;
+  }
+};
+
+export const getClients = async () => {
+  try {
+    const response = await apiClient.get('/api/auth/users');
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching clients: ", error);
+    throw error;
+  }
 };
 
 // Get a specific work item by ID
 export const getWorkItem = async (id) => {
-  const response = await axios.get(`${API_BASE_URL}/api/workitems/${id}`);
-  return response.data;
+  try {
+    const response = await apiClient.get(`${API_BASE_URL}/api/workitems/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching work item: ", error);
+    throw error;
+  }
 };
 
 // Update a work item
 export const updateWorkItem = async (id, data) => {
-  const response = await axios.put(`${API_BASE_URL}/api/workitems/${id}`, data);
-  return response.data;
+  try {
+    const response = await apiClient.put(`${API_BASE_URL}/api/workitems/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating work item: ", error);
+    throw error;
+  }
 };
 
 // Delete a work item
 export const deleteWorkItem = async (id) => {
-  await axios.delete(`${API_BASE_URL}/api/workitems/${id}`);
-};
-
-// Get all clients
-export const getClients = async () => {
-  const response = await axios.get(`${API_BASE_URL}/api/clients`);
-  return response.data;
-};
-
-// Create a new client
-export const createClient = async (data) => {
-  const response = await axios.post(`${API_BASE_URL}/api/clients`, data);
-  return response.data;
-};
-
-// Get a specific client by ID
-export const getClient = async (id) => {
-  const response = await axios.get(`${API_BASE_URL}/api/clients/${id}`);
-  return response.data;
-};
-
-// Update a client
-export const updateClient = async (id, data) => {
-  const response = await axios.put(`${API_BASE_URL}/api/clients/${id}`, data);
-  return response.data;
-};
-
-// Delete a client
-export const deleteClient = async (id) => {
-  await axios.delete(`${API_BASE_URL}/api/clients/${id}`);
+  try {
+    await apiClient.delete(`${API_BASE_URL}/api/workitems/${id}`);
+  } catch (error) {
+    console.error("Error deleting work item: ", error);
+    throw error;
+  }
 };
